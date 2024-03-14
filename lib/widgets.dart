@@ -86,9 +86,17 @@ class number_item{
   Color color;
   number_item({required this.number,required this.color});
 }
+
 showSnack(String text){
   return SnackBar(
       content: Text(text),
+  );
+}
+
+drawertiles(String dificultad,String instrucciones){
+  return ListTile(
+    title: Text(dificultad),
+    subtitle: Text(instrucciones),
   );
 }
 

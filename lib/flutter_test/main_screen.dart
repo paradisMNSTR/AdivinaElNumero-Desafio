@@ -14,6 +14,7 @@ class adivina extends StatefulWidget {
 }
 
 class _adivinaState extends State<adivina> {
+  GlobalKey<ScaffoldState> sca_key = GlobalKey();
   Random random = new Random();
   FocusNode myNode = FocusNode();
   int ranmdom_Number = 0;
@@ -32,8 +33,10 @@ class _adivinaState extends State<adivina> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: sca_key,
       appBar: _AppBar(),
       body: _Body(),
+      endDrawer: _endDrawer(),
     );
   }
 
@@ -41,7 +44,9 @@ class _adivinaState extends State<adivina> {
     return AppBar(
       title: Center(child: Text('Adivina el Numero')),
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.menu))
+        IconButton(onPressed: (){
+          sca_key.currentState?.openEndDrawer();
+        }, icon: Icon(Icons.menu))
 
       ],
     );
@@ -205,6 +210,19 @@ class _adivinaState extends State<adivina> {
       builder: (BuildContext context){
         return Dialogo(content: '${content}');
       }
+    );
+  }
+  _endDrawer(){
+    return Drawer(
+      child: ListView(
+        children:[
+          DrawerHeader(child: Text('Dificultad')),
+          drawertiles('Facil', 'Números del 1 al 10, con 5 intentos'),
+          drawertiles('Medio', 'Números del 1 al 20, con 8 intentos'),
+          drawertiles('Avanzado', 'Números del 1 al 100, con 15 intentos'),
+          drawertiles('Extremo', 'Números del 1 al 1000, con 25 intentos'),
+        ],
+      ),
     );
   }
 }
